@@ -1,0 +1,26 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: redis
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 2000ms
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000 # 10분
+      cache-null-values: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+logging:
+  level:
+    rounderall.redis: DEBUG
+    org.springframework.data.redis: DEBUG
