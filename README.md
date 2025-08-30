@@ -66,37 +66,46 @@ docker-compose ps
 
 ## 📋 모듈별 상세 정보
 
-### Batch/Scheduler 모듈
+### ✅ Batch/Scheduler 모듈
+
 - **포트**: 8081
 - **기능**: Spring Batch Job, Quartz Scheduler
 - **데이터베이스**: batch_scheduler
+- **[📖 상세 가이드](./batch-scheduler/ReadMe.md)**
 
-### Architecture 모듈
+### ✅ Architecture 모듈
+
 - **포트**: 8082
 - **기능**: Hexagonal Architecture, DDD 패턴
 - **데이터베이스**: architecture
+- **[📖 상세 가이드](./architecture/ReadMe.md)**
 
 ### Security 모듈
+
 - **포트**: 8083
 - **기능**: RBAC, ABAC, PBAC, JWT 인증
 - **데이터베이스**: security
 
 ### Kafka 모듈
+
 - **포트**: 8084
 - **기능**: Kafka Producer/Consumer, Streams
 - **브로커**: localhost:9092
 
 ### Kotest Spec 모듈
+
 - **포트**: 8085
 - **기능**: Kotest, MockK, Fixture Monkey 테스트
 - **데이터베이스**: kotest_spec
 
 ### QueryDSL 모듈
+
 - **포트**: 8086
 - **기능**: QueryDSL을 이용한 타입 안전한 쿼리
 - **데이터베이스**: querydsl
 
 ### Redis 모듈
+
 - **포트**: 8087
 - **기능**: Redis 캐싱, Feature Flag
 - **Redis**: localhost:6379
@@ -116,19 +125,23 @@ docker-compose ps
 각 모듈은 독립적으로 개발할 수 있으며, 필요에 따라 다른 모듈의 기능을 참조할 수 있습니다.
 
 ### 모듈별 설정
+
 - 각 모듈의 `application.yml`에서 포트와 데이터베이스 설정을 확인하세요
 - Docker Compose로 실행된 서비스들의 상태를 확인하세요
 
 ### 테스트 작성
+
 - Kotest Spec 모듈을 참조하여 테스트 패턴을 확인하세요
 - Fixture Monkey를 활용한 테스트 데이터 생성 방법을 학습하세요
 
 ## 🔧 문제 해결
 
 ### 포트 충돌
+
 각 모듈이 다른 포트를 사용하도록 설정되어 있습니다. 필요시 `application.yml`에서 포트를 변경하세요.
 
 ### 데이터베이스 연결 실패
+
 ```bash
 # Docker Compose 서비스 상태 확인
 docker-compose ps
@@ -138,6 +151,7 @@ docker-compose logs mysql
 ```
 
 ### Kafka 연결 실패
+
 ```bash
 # Kafka 컨테이너 상태 확인
 docker-compose logs kafka
