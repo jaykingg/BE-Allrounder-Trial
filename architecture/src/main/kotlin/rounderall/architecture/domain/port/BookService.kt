@@ -2,6 +2,7 @@ package rounderall.architecture.domain.port
 
 import rounderall.architecture.domain.model.Book
 import rounderall.architecture.domain.model.BookId
+import rounderall.architecture.domain.model.Money
 
 /**
  * 도서 서비스 포트 (인바운드 포트)
@@ -46,7 +47,4 @@ interface BookService {
      */
     fun deleteBook(id: BookId)
 }
-```
-
-```
 
