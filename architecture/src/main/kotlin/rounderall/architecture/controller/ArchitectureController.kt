@@ -27,7 +27,13 @@ class ArchitectureController {
                 "Clean Architecture",
                 "Ports and Adapters"
             ),
-            "port" to 8082
+            "port" to 8082,
+            "examples" to listOf(
+                "Book Management System",
+                "Domain Models with Business Logic",
+                "Ports and Adapters Pattern",
+                "Application Services"
+            )
         )
     }
 }
