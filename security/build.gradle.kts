@@ -25,9 +25,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     
     // JWT 관련
-    implementation("io.jsonwebtoken:jjwt-api:0.12.3")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.3")
-    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.3")
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
     
     // Keycloak 관련
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")

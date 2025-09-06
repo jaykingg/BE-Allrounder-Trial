@@ -24,3 +24,4 @@ interface UserRepository : JpaRepository<User, Long> {
     
     @Query("SELECT u FROM User u JOIN FETCH u.userRoles ur JOIN FETCH ur.role r JOIN FETCH r.rolePermissions rp JOIN FETCH rp.permission WHERE u.username = :username")
     fun findByUsernameWithRolesAndPermissions(@Param("username") username: String): User?
+}
