@@ -219,3 +219,104 @@ keycloak:
     - 필요한 도메인만 허용
 - **Keycloak**
     - 프로덕션 환경에서는 별도 서버 운영 권장
+
+## 분석 시나리오
+
+### 단계별 파악
+
+#### 1단계: 전체 아키텍처 파악
+
+- README.md - 전체 개요와 구조 설명
+- build.gradle.kts - 사용된 기술 스택과 의존성 파악
+- application.yml - 설정 정보 확인
+
+#### 2단계: 도메인 모델 이해
+
+도메인 레이어부터 시작
+
+```text
+security/src/main/kotlin/rounderall/security/domain/
+├── common/
+│   ├── BaseEntity.kt          ← 1. 기본 엔티티 구조
+│   └── ValueObject.kt         ← 2. 값 객체 패턴
+├── rbac/
+│   ├── User.kt                ← 3. 사용자 도메인 (핵심)
+│   ├── Role.kt                ← 4. 역할 도메인
+│   ├── Permission.kt          ← 5. 권한 도메인
+│   ├── UserRole.kt            ← 6. 사용자-역할 관계
+│   ├── RolePermission.kt      ← 7. 역할-권한 관계
+│   └── UserPermission.kt      ← 8. 사용자-권한 관계
+├── jwt/
+│   └── Token.kt               ← 9. JWT 토큰 도메인
+└── policy/
+    ├── AccessPolicy.kt        ← 10. 접근 정책 인터페이스
+    └── RbacPolicy.kt          ← 11. RBAC 정책 구현
+```
+
+#### 3단계: 인프라 레이어 파악
+
+데이터 접근과 설정
+
+```text
+security/src/main/kotlin/rounderall/security/infrastructure/
+├── repository/
+│   ├── UserRepository.kt      ← 12. 사용자 데이터 접근
+│   ├── RoleRepository.kt      ← 13. 역할 데이터 접근
+│   └── PermissionRepository.kt ← 14. 권한 데이터 접근
+├── config/
+│   ├── SecurityConfig.kt      ← 15. Spring Security 설정
+│   └── DataInitializer.kt     ← 16. 초기 데이터 설정
+├── service/
+│   └── CustomUserDetailsService.kt ← 17. 사용자 인증 서비스
+└── filter/
+    └── JwtAuthenticationFilter.kt  ← 18. JWT 인증 필터
+```
+
+#### 4단계: 애플리케이션 레이어 이해
+
+비즈니스 로직
+
+```text
+security/src/main/kotlin/rounderall/security/application/service/
+├── AuthenticationService.kt   ← 19. 인증 서비스 (핵심)
+├── JwtService.kt              ← 20. JWT 토큰 서비스
+├── UserService.kt             ← 21. 사용자 관리 서비스
+├── RoleService.kt             ← 22. 역할 관리 서비스
+├── PermissionService.kt       ← 23. 권한 관리 서비스
+└── KeycloakService.kt         ← 24. Keycloak 연동 서비스
+```
+
+#### 5단계: 프레젠테이션 레이어 확인
+
+REST API
+
+```text
+security/src/main/kotlin/rounderall/security/controller/
+├── AuthController.kt          ← 25. 인증 API
+├── UserController.kt          ← 26. 사용자 관리 API
+├── RoleController.kt          ← 27. 역할 관리 API
+└── PermissionController.kt    ← 28. 권한 관리 API
+```
+
+### 핵심 플로우 이해
+
+- 인증 플로우
+    - `AuthController.login()` → `AuthenticationService.authenticate()`
+    - `JwtService.generateToken()` → 토큰 생성
+    - `JwtAuthenticationFilter` → 요청마다 토큰 검증
+- 권한 확인 플로우
+    - `User.hasPermission()` → 사용자 권한 확인
+    - `RbacPolicy.evaluate()` → RBAC 정책 적용
+    - `@PreAuthorize` → 메서드 레벨 보안
+
+### 분석 접근 방식
+
+- Top-Down 접근: 컨트롤러 → 서비스 → 도메인 순서로
+- Bottom-Up 접근: 도메인 → 서비스 → 컨트롤러 순서로
+- 플로우 중심: 특정 기능(로그인, 권한 확인)의 전체 흐름 추적
+
+### 분석 실습
+
+- 로그인 플로우를 `AuthController`부터 시작해서 끝까지 추적
+- 사용자 생성 플로우를 `UserController`부터 추적
+- 권한 확인 플로우를 `@PreAuthorize` 부터 추적
