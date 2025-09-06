@@ -61,15 +61,15 @@ Security Module
 
 ## 주요 인증 플로우
 
-![img.png](img.png)
+![img.png](ReadMe-images/img.png)
 
 ## 주요 인가 플로우
 
-![img_1.png](img_1.png)
+![img_1.png](ReadMe-images/img_1.png)
 
 ## RBAC 권한 체크 플로우
 
-![img_2.png](img_2.png)
+![img_2.png](ReadMe-images/img_2.png)
 
 ## 구현된 주요 기능들:
 
