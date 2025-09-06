@@ -85,6 +85,7 @@ docker-compose ps
 - **포트**: 8083
 - **기능**: RBAC, ABAC, PBAC, JWT 인증
 - **데이터베이스**: security
+- **[📖 상세 가이드](./security/ReadMe.md)**
 
 ### Kafka 모듈
 
