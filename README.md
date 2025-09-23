@@ -80,7 +80,7 @@ docker-compose ps
 - **데이터베이스**: architecture
 - **[📖 상세 가이드](./architecture/ReadMe.md)**
 
-### Security 모듈
+### ✅ Security 모듈
 
 - **포트**: 8083
 - **기능**: RBAC, ABAC, PBAC, JWT 인증
@@ -108,7 +108,7 @@ docker-compose ps
 ### Redis 모듈
 
 - **포트**: 8087
-- **기능**: Redis 캐싱, Feature Flag
+- **기능**: Redis 분산락, Redis 캐싱
 - **Redis**: localhost:6379
 
 ## 🛠️ 기술 스택
