@@ -23,4 +23,3 @@ management:
 logging:
   level:
     rounderall.redis: DEBUG
-    org.springframework.data.redis: DEBUG
